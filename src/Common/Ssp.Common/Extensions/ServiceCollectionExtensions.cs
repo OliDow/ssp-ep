@@ -9,7 +9,7 @@ namespace Ssp.Common.Extensions;
 [ExcludeFromCodeCoverage]
 public static class ServiceCollectionExtensions
 {
-    public static void AddTelemetry(this IServiceCollection services, string cloudRoleName)
+    public static IServiceCollection AddTelemetry(this IServiceCollection services, string cloudRoleName)
         => services
             .AddSingleton<ITelemetryInitializer>(new CloudRoleNameInitializer(cloudRoleName))
             .AddApplicationInsightsTelemetry();

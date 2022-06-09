@@ -30,8 +30,6 @@
         <None Remove=".gitignore" />
     </ItemGroup>
     <ItemGroup>
-        <ProjectReference Include="..\..\..\Common\Ssp.EP.Events\Ssp.EP.Events.csproj" />
-        <ProjectReference Include="..\..\Ssp.EP.Events\Ssp.EP.Events.csproj" />
-        <ProjectReference Include="..\Ssp.EP.Application\Ssp.EP.Application.csproj" />
+      <ProjectReference Include="..\Ssp.EP.Application\Ssp.EP.Application.csproj" />
     </ItemGroup>
 </Project>

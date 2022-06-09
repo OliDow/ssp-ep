@@ -1,9 +1,7 @@
-﻿using Azure.Messaging.ServiceBus;
-using Microsoft.Extensions.Azure;
+﻿using Microsoft.Extensions.Azure;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Ssp.Common.Messaging.EventHub;
-using Ssp.Common.Messaging.Functions;
 using Ssp.Common.Messaging.Functions.Builders;
 using Ssp.Common.Messaging.Messaging;
 using Ssp.Common.Messaging.Provider;

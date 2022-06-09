@@ -5,13 +5,12 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Azure.WebJobs;
 using Microsoft.Azure.WebJobs.Extensions.Http;
 using Microsoft.Extensions.Configuration;
-using Ssp.Common.Messaging;
+using Ssp.Common;
 using Ssp.Common.Messaging.Functions;
 using Ssp.Common.Messaging.Messaging;
 using Ssp.Common.Messaging.Provider;
 using Ssp.Common.Messaging.Repository;
 using Ssp.Common.Providers;
-using Ssp.EP.Events;
 using Ssp.EP.Events.Source;
 using System.Text;
 using System.Text.Json;
@@ -21,7 +20,7 @@ namespace Ssp.EP.FunctionApp;
 
 public class EventIngester : HttpTriggerBase
 {
-    private readonly IEventProvider<MeterCreated> _eventProvider;
+    private readonly IEventProvider<Meter> _eventProvider;
     private readonly EventHubProducerClient _eventHubProducer;
 
     private static readonly JsonSerializerOptions SerializerOptions = new()
@@ -34,7 +33,7 @@ public class EventIngester : HttpTriggerBase
         IMessageContext messageContext,
         IEventSchemaRepository eventSchemaRepository,
         IGuidProvider guidProvider,
-        IEventProvider<MeterCreated> eventProvider, // need to wrap this to prevent the need to specify a type when injecting
+        IEventProvider<Meter> eventProvider, // need to wrap this to prevent the need to specify a type when injecting
         IConfiguration configuration)
         : base(messageContext, eventSchemaRepository, guidProvider)
     {
@@ -101,6 +100,3 @@ public class EventIngester : HttpTriggerBase
     // Below can be moved, here for a quick POC
     private record IngestEvent(string MessageType, object Data, string CorrelationId);
 }
-
-
-// versio

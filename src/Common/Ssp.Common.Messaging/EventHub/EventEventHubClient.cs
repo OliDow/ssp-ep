@@ -5,5 +5,6 @@ namespace Ssp.Common.Messaging.EventHub;
 
 public class EventEventHubClient : IEventHubClient
 {
-    public EventEventHubClient(IMessageContext messageContext, IConfiguration configuration) { }
+    public EventEventHubClient(IMessageContext messageContext, IConfiguration configuration)
+    { }
 }

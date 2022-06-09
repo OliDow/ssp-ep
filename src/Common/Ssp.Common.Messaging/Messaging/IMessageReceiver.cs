@@ -1,6 +1,8 @@
-﻿namespace Ssp.Common.Messaging.Messaging;
+﻿using Azure.Messaging.ServiceBus;
 
-public interface IMessageReceiver<TBusMessage>
+namespace Ssp.Common.Messaging.Messaging;
+
+public interface IMessageReceiver
 {
-    Task ReceiveAsync(TBusMessage busMessage, CancellationToken cancellationToken);
+    Task ReceiveAsync(ServiceBusReceivedMessage busMessage, CancellationToken cancellationToken);
 }

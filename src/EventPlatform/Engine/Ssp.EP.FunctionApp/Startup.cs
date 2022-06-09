@@ -24,7 +24,7 @@ public class Startup : FunctionsStartup
         var configuration = builder.GetContext().Configuration;
         builder.Services.AddPocMessaging(configuration);
         builder.Services.AddPocEventHub(configuration);
-        builder.Services.AddEventProvider<MeterCreated>();
+        builder.Services.AddEventProvider<Meter>();
         builder.Services.AddEventRouting(configuration);
     }
 }

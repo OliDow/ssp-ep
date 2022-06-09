@@ -1,6 +1,7 @@
-﻿using Ssp.Common.Messaging;
+﻿using Ssp.Common;
+using Ssp.Common.Messaging;
 
-namespace Ssp.EP.Events.Ui;
+namespace Ssp.EP.Events.UI;
 
 // set all these as string to not make any assumptions
 public record SubmitMeterReading(string MeterPointId, string Reading) : IEvent

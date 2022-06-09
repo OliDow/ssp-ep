@@ -4,17 +4,22 @@ using System.Text.Json;
 
 namespace Ssp.Common.Messaging.Messaging;
 
-internal class MessageReceiver : MessageReceiverBase<ServiceBusReceivedMessage>
+public class MessageReceiver : IMessageReceiver
 {
-    public MessageReceiver(IMediator mediator)
-        : base(mediator) { }
+    private readonly IMediator _mediator;
 
-    protected override IMessage GetMessage(ServiceBusReceivedMessage busMessage)
+    public MessageReceiver(IMediator mediator)
+    {
+        _mediator = mediator ?? throw new ArgumentNullException(nameof(mediator));
+    }
+
+    public Task ReceiveAsync(ServiceBusReceivedMessage busMessage, CancellationToken cancellationToken)
     {
         var messageTypeProp = busMessage.ApplicationProperties.GetValueOrDefault(Constants.MessageTypePropertyName);
         var messageType = Type.GetType(messageTypeProp?.ToString() ?? string.Empty, true);
         var payloadJson = busMessage.Body.ToString();
-        var payload = JsonSerializer.Deserialize(payloadJson, messageType!) as IMessage;
-        return payload!;
+        var payload = JsonSerializer.Deserialize(payloadJson, messageType!);
+
+        return _mediator.Send(payload!, cancellationToken);
     }
 }

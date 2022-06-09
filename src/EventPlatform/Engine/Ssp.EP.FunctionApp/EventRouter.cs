@@ -1,7 +1,6 @@
 ﻿using Azure.Messaging.EventHubs;
 using Microsoft.Azure.WebJobs;
-using Microsoft.WindowsAzure.Storage.RetryPolicies;
-using Ssp.Common.Messaging;
+using Ssp.Common;
 using Ssp.Common.Messaging.Functions;
 using Ssp.Common.Messaging.Functions.Builders;
 using Ssp.Common.Messaging.Messaging;
@@ -9,23 +8,22 @@ using Ssp.Common.Messaging.Provider;
 using Ssp.Common.Messaging.Repository;
 using Ssp.EP.Application.Delivery;
 using Ssp.EP.Application.Repositories;
-using Ssp.EP.Events;
 using Ssp.EP.Events.Source;
 using System.Text.Json;
 
 namespace Ssp.EP.FunctionApp;
 
-public class EventRouter : ServiceBusTriggerBase
+public class EventRouter : TriggerBase
 {
-    private readonly IEventProvider<MeterCreated> _eventProvider;
+    private readonly IEventProvider<Meter> _eventProvider;
     private readonly IEventConfigRepository _eventConfigRepository;
     private readonly IList<IDeliveryStrategy> _deliveryStrategies;
 
     public EventRouter(IMessageContext messageContext, IErrorMetadataBuilder errorMetadataBuilder,
-        IEventProvider<MeterCreated> eventProvider, // need to wrap this to prevent the need to specify a type when injecting
+        IEventProvider<Meter> eventProvider, // need to wrap this to prevent the need to specify a type when injecting
         IEventSchemaRepository eventSchemaRepository, IEventConfigRepository eventConfigRepository,
         IList<IDeliveryStrategy> deliveryStrategies)
-        : base(messageContext, errorMetadataBuilder, eventSchemaRepository)
+        : base(messageContext, eventSchemaRepository)
     {
         _eventConfigRepository = eventConfigRepository ?? throw new ArgumentNullException(nameof(eventConfigRepository));
         _deliveryStrategies = deliveryStrategies ?? throw new ArgumentNullException(nameof(deliveryStrategies));
