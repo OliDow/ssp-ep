@@ -1,10 +1,11 @@
-namespace Ssp.Common.Json.UnitTest;
-
-public class CommonJson
+namespace Ssp.Common.Json.UnitTest
 {
-    [Fact]
-    public void Test1()
+    public class UnitTest1
     {
+        [Fact]
+        public void Test1()
+        {
 
+        }
     }
 }
