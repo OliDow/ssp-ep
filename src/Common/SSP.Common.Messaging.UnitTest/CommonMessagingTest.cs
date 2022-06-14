@@ -1,6 +1,6 @@
 namespace SSP.Common.Messaging.UnitTest
 {
-    public class UnitTest1
+    public class CommonMessagingTest
     {
         [Fact]
         public void Test1()
